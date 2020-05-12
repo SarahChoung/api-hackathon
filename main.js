@@ -1,18 +1,17 @@
-// NYTimes  API key: HaKYObfArvAiEEXXYE4S7EXBYOd0mpP0
-// YT API key: AIzaSyDk49iU_ZTZcnVKaF3dRbOtFEtZWhINHgc
-
-
 //Form Submission
 var userInput;
 var form = document.querySelector("form");
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var textInput = event.target[0];
   var textValue = textInput.value;
-  console.log(textValue);
   var textNoSpace = textValue.split(" ").join("_");
   console.log(textNoSpace);
   userInput = textNoSpace;
+
+  getArticle();
+  getVideo();
 })
 
 
@@ -39,9 +38,21 @@ function getVideo() {
 }
 
 function embedVideo(data) {
-  $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
-  $('h4.title').text(data.items[0].snippet.title)
-  $('.description').text(data.items[0].snippet.description)
+  var iFrame = document.createElement("iframe");
+  iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+
+  var vidTitle = document.createElement("h4");
+  vidTitle.textContent = data.items[0].snippet.title;
+
+  var vidDescription = document.createElement("p");
+  vidDescription.textContent = data.items[0].snippet.description;
+
+  document.querySelector("div#ytdiv").append(iFrame, vidTitle, vidDescription);
+
+
+  // $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+  // $('h4.title').text(data.items[0].snippet.title);
+  // $('.description').text(data.items[0].snippet.description);
 }
 
 
@@ -54,11 +65,8 @@ function getArticle() {
   })
 
   function embedArticle(data) {
-    console.log(data.results);
     var articleResults = data.results;
-    console.log(articleResults[0].link);
     var articleLink = articleResults[0].link;
-    console.log(articleLink.url);
     var articleURL = articleLink.url;
     var nyTimeLink = document.createElement("p");
     nyTimeLink.append(articleURL);
