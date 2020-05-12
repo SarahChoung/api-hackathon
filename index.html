@@ -13,16 +13,16 @@
 <body>
   <h1 class="text-center">Movie Info</h1>
   <div class="container">
-    <form class="pl-5 pr-5">
+    <form class="pl-5 pr-5" action="" method="post">
       <div class="form-group">
         <label for="movieinput">Movie Title</label>
-        <input type="text" class="form-control" name="movie" id="movieinput">
+        <input type="text" class="form-control" name="movieinput" id="movieinput">
       </div>
-      <button type="submit" class="btn btn-success">Search</button>
+      <button type="submit" class="btn btn-success" id="submit-button">Search</button>
       <button type="reset" class="btn btn-secondary">Reset</button>
     </form>
     <div class="row mt-5">
-      <div class="col-6 text-center">
+      <div class="col-6 text-center" id="nydiv">
         <h3 class="text-white bg-dark">NY Times Reviews</h3>
       </div>
       <div class="col-6 text-center">
@@ -37,6 +37,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+  <script src="config.js"></script>
   <script src="main.js"></script>
 </body>
 
