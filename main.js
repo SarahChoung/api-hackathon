@@ -45,11 +45,9 @@ function embedVideo(data) {
   var vidTitle = document.createElement("h4");
   vidTitle.textContent = data.items[0].snippet.title;
 
-  var vidDescription = document.createElement("p");
-  vidDescription.textContent = data.items[0].snippet.description;
-
-  videoDiv.append(iFrame, vidTitle, vidDescription);
+  videoDiv.append(iFrame, vidTitle);
   document.querySelector("div#ytdiv").append(videoDiv);
+}
 
 //NY TIMES ARTICLE
 function getArticle() {
@@ -62,17 +60,25 @@ function getArticle() {
   function embedArticle(data) {
     var articleResults = data.results;
 
-    var articleLink = articleResults[0].link;
-    var articleURL = articleLink.url;
-    var articleHeadline = articleResults[0].headline;
+    if (articleResults.length === 0) {
+      var noArticleAvailable = document.createElement("p");
+      noArticleAvailable.textContent = "There are no movie reviews for this movie.";
+      document.querySelector("ul#nydiv").append(noArticleAvailable);
+    } else {
+      for (var i=0; i < articleResults.length; i++) {
+        var articleLink = articleResults[i].link;
+        var articleURL = articleLink.url;
+        var articleHeadline = articleResults[i].headline;
 
-    var nyTimeListEl = document.createElement("li");
-    var nyTimeLink = document.createElement("a");
-    nyTimeLink.setAttribute('href', articleURL);
-    nyTimeLink.textContent = articleHeadline;
+        var nyTimeListEl = document.createElement("li");
+        var nyTimeLink = document.createElement("a");
+        nyTimeLink.setAttribute('href', articleURL);
+        nyTimeLink.textContent = articleHeadline;
 
-    nyTimeListEl.append(nyTimeLink);
-    document.querySelector("ul#nydiv").append(nyTimeListEl);
+        nyTimeListEl.append(nyTimeLink);
+        document.querySelector("ul#nydiv").append(nyTimeListEl);
+      }
+    }
   }
 
   function logError(err) {
