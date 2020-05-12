@@ -41,20 +41,15 @@ function embedVideo(data) {
   var iFrame = document.createElement("iframe");
   iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
 
+  var videoDiv = document.createElement("div");
   var vidTitle = document.createElement("h4");
   vidTitle.textContent = data.items[0].snippet.title;
 
   var vidDescription = document.createElement("p");
   vidDescription.textContent = data.items[0].snippet.description;
 
-  document.querySelector("div#ytdiv").append(iFrame, vidTitle, vidDescription);
-
-
-  // $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
-  // $('h4.title').text(data.items[0].snippet.title);
-  // $('.description').text(data.items[0].snippet.description);
-}
-
+  videoDiv.append(iFrame, vidTitle, vidDescription);
+  document.querySelector("div#ytdiv").append(videoDiv);
 
 //NY TIMES ARTICLE
 function getArticle() {
@@ -66,11 +61,18 @@ function getArticle() {
 
   function embedArticle(data) {
     var articleResults = data.results;
+
     var articleLink = articleResults[0].link;
     var articleURL = articleLink.url;
-    var nyTimeLink = document.createElement("p");
-    nyTimeLink.append(articleURL);
-    document.querySelector("div#nydiv").append(nyTimeLink);
+    var articleHeadline = articleResults[0].headline;
+
+    var nyTimeListEl = document.createElement("li");
+    var nyTimeLink = document.createElement("a");
+    nyTimeLink.setAttribute('href', articleURL);
+    nyTimeLink.textContent = articleHeadline;
+
+    nyTimeListEl.append(nyTimeLink);
+    document.querySelector("ul#nydiv").append(nyTimeListEl);
   }
 
   function logError(err) {
