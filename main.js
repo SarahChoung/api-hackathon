@@ -24,7 +24,7 @@ function getVideo() {
       key: youtubeAPIKey,
       q: userInput,
       part: 'snippet',
-      maxResults: 1,
+      maxResults: 10,
       type: 'video',
       videoEmbeddable: true,
     },
@@ -38,15 +38,19 @@ function getVideo() {
 }
 
 function embedVideo(data) {
-  var iFrame = document.createElement("iframe");
-  iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+  console.log(data.items);
 
-  var videoDiv = document.createElement("div");
-  var vidTitle = document.createElement("h4");
-  vidTitle.textContent = data.items[0].snippet.title;
+  for (var i=0; i<data.items.length; i++) {
+    var iFrame = document.createElement("iframe");
+    iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
 
-  videoDiv.append(iFrame, vidTitle);
-  document.querySelector("div#ytdiv").append(videoDiv);
+    var videoDiv = document.createElement("div");
+    var vidTitle = document.createElement("h4");
+    vidTitle.textContent = data.items[i].snippet.title;
+
+    videoDiv.append(iFrame, vidTitle);
+    document.querySelector("div#ytdiv").append(videoDiv);
+  }
 }
 
 //NY TIMES ARTICLE
