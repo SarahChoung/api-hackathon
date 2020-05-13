@@ -4,6 +4,7 @@ var form = document.querySelector("form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+  resetSearch();
   var textInput = event.target[0];
   var textValue = textInput.value;
   var textNoSpace = textValue.split(" ").join("_");
@@ -87,5 +88,19 @@ function getArticle() {
 
   function logError(err) {
     console.log("error", err)
+  }
+}
+
+//Reset Functionality
+
+function resetSearch() {
+  var nyDiv = document.querySelector("ul#nydiv");
+  while (nyDiv.firstChild) {
+    nyDiv.removeChild(nyDiv.lastChild);
+  }
+
+  var ytDiv = document.querySelector("div#ytdiv");
+  while (ytDiv.firstChild) {
+    ytDiv.removeChild(ytDiv.lastChild);
   }
 }
