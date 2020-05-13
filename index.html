@@ -13,6 +13,7 @@
 <body>
   <h1 class="text-center">Movie Info</h1>
   <div class="container">
+    <!--Form-->
     <form class="pl-5 pr-5" action="" method="post">
       <div class="form-group">
         <label for="movieinput">Movie Title</label>
@@ -21,6 +22,14 @@
       <button type="submit" class="btn btn-success" id="submit-button">Search</button>
       <button type="reset" class="btn btn-secondary">Reset</button>
     </form>
+    <!-- Movie Trailer-->
+    <div class="row mt-5 text-center d-flex  justify-content-center">
+      <div class="col-6">
+        <h3 class="text-white bg-dark text-center">Movie Trailer</h3>
+        <div id="trailerdiv"></div>
+      </div>
+    </div>
+    <!-- Reviews -->
     <div class="row mt-5">
       <div class="col-6">
         <h3 class="text-white bg-dark text-center">NY Times Reviews</h3>
@@ -29,7 +38,7 @@
         </ul>
       </div>
       <div class="col-6 text-center">
-        <h3 class="text-white bg-dark">YouTube Videos</h3>
+        <h3 class="text-white bg-dark">YouTube Video Reviews</h3>
         <div  id="ytdiv"></div>
       </div>
     </div>

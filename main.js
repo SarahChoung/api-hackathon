@@ -13,6 +13,7 @@ form.addEventListener("submit", function (event) {
 
   getArticle();
   getVideo();
+  getTrailer();
 })
 
 
@@ -22,7 +23,7 @@ function getVideo() {
   if (userInput.includes("movie")) {
     console.log("you're good");
   } else {
-    ytUserInput = userInput + "movie"
+    ytUserInput = userInput.split("_").join("") + "review";
   }
 
   $.ajax({
@@ -45,6 +46,34 @@ function getVideo() {
   });
 }
 
+function getTrailer() {
+  var ytUserInput = "";
+  if (userInput.includes("movie")) {
+    console.log("you're good");
+  } else {
+    ytUserInput = userInput.split("_").join("") + "trailer";
+  }
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    data: {
+      key: youtubeAPIKey,
+      q: ytUserInput,
+      part: 'snippet',
+      maxResults: 1,
+      type: 'video',
+      videoEmbeddable: true,
+    },
+    success: function (data) {
+      embedTrailer(data);
+    },
+    error: function (response) {
+      console.log("Request Failed");
+    }
+  });
+}
+
 function embedVideo(data) {
   console.log(data.items);
 
@@ -59,6 +88,20 @@ function embedVideo(data) {
     videoDiv.append(iFrame, vidTitle);
     document.querySelector("div#ytdiv").append(videoDiv);
   }
+}
+
+function embedTrailer(data) {
+  console.log(data.items);
+
+  var iFrame = document.createElement("iframe");
+  iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+
+  var videoDiv = document.createElement("div");
+  var vidTitle = document.createElement("h4");
+  vidTitle.textContent = data.items[0].snippet.title;
+
+  videoDiv.append(iFrame, vidTitle);
+  document.querySelector("div#trailerdiv").append(videoDiv);
 }
 
 //NY TIMES ARTICLE
