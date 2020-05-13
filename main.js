@@ -18,12 +18,19 @@ form.addEventListener("submit", function (event) {
 
 //YOUTUBE VIDEO
 function getVideo() {
+  var ytUserInput = "";
+  if (userInput.includes("movie")) {
+    console.log("you're good");
+  } else {
+    ytUserInput = userInput + "movie"
+  }
+
   $.ajax({
     type: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
       key: youtubeAPIKey,
-      q: userInput,
+      q: ytUserInput,
       part: 'snippet',
       maxResults: 10,
       type: 'video',
