@@ -17,28 +17,32 @@
     <form class="pl-5 pr-5" action="" method="post">
       <div class="form-group">
         <label for="movieinput">Movie Title</label>
-        <input type="text" class="form-control" name="movieinput" id="movieinput">
+        <input type="text" class="form-control" name="movieinput" id="movieinput" placeholder="Enter Movie Title Here">
       </div>
       <button type="submit" class="btn btn-success" id="submit-button">Search</button>
-      <button type="reset" class="btn btn-secondary">Reset</button>
+      <button type="reset" class="btn btn-secondary">Clear</button>
     </form>
     <!-- Movie Trailer-->
     <div class="row mt-5 text-center d-flex  justify-content-center">
       <div class="col-6">
         <h3 class="text-white bg-dark text-center">Movie Trailer</h3>
-        <div id="trailerdiv"></div>
+        <img id="suchempty1" src="assets/such-empty.jpg">
+        <div id="trailerdiv">
+        </div>
       </div>
     </div>
     <!-- Reviews -->
     <div class="row mt-5">
       <div class="col-6">
         <h3 class="text-white bg-dark text-center">NY Times Reviews</h3>
+        <img id="suchempty2" src="assets/such-empty.jpg">
         <ul id="nydiv">
 
         </ul>
       </div>
       <div class="col-6 text-center">
         <h3 class="text-white bg-dark">YouTube Video Reviews</h3>
+        <img id="suchempty3" src="assets/such-empty.jpg">
         <div  id="ytdiv"></div>
       </div>
     </div>

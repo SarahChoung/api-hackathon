@@ -18,33 +18,6 @@ form.addEventListener("submit", function (event) {
 
 
 //YOUTUBE VIDEO
-function getVideo() {
-  var ytUserInput = "";
-  if (userInput.includes("movie")) {
-    console.log("you're good");
-  } else {
-    ytUserInput = userInput.split("_").join("") + "review";
-  }
-
-  $.ajax({
-    type: 'GET',
-    url: 'https://www.googleapis.com/youtube/v3/search',
-    data: {
-      key: youtubeAPIKey,
-      q: ytUserInput,
-      part: 'snippet',
-      maxResults: 10,
-      type: 'video',
-      videoEmbeddable: true,
-    },
-    success: function(data) {
-      embedVideo(data);
-    },
-    error: function (response) {
-      console.log("Request Failed");
-    }
-  });
-}
 
 function getTrailer() {
   var ytUserInput = "";
@@ -74,35 +47,90 @@ function getTrailer() {
   });
 }
 
-function embedVideo(data) {
-  console.log(data.items);
-
-  for (var i=0; i<data.items.length; i++) {
-    var iFrame = document.createElement("iframe");
-    iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
-
-    var videoDiv = document.createElement("div");
-    var vidTitle = document.createElement("h4");
-    vidTitle.textContent = data.items[i].snippet.title;
-
-    videoDiv.append(iFrame, vidTitle);
-    document.querySelector("div#ytdiv").append(videoDiv);
+function getVideo() {
+  var ytUserInput = "";
+  if (userInput.includes("movie")) {
+    console.log("you're good");
+  } else {
+    ytUserInput = userInput.split("_").join("") + "review";
   }
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    data: {
+      key: youtubeAPIKey,
+      q: ytUserInput,
+      part: 'snippet',
+      maxResults: 10,
+      type: 'video',
+      videoEmbeddable: true,
+    },
+    success: function(data) {
+      embedVideo(data);
+    },
+    error: function (response) {
+      console.log("Request Failed");
+    }
+  });
 }
 
 function embedTrailer(data) {
+  //delete img
+  var suchEmpty1 = document.querySelector("img#suchempty1")
+  if (suchEmpty1) {
+    suchEmpty1.remove();
+  }
+
   console.log(data.items);
 
-  var iFrame = document.createElement("iframe");
-  iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+  if (data.items.length === 0) {
+    var noTrailerAvailable = document.createElement("p");
+    noTrailerAvailable.textContent = "There are no available trailers on YouTube for this movie.";
+    document.querySelector("div#trailerdiv").append(noTrailerAvailable);
+  } else {
+    var iFrame = document.createElement("iframe");
+    iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
 
-  var videoDiv = document.createElement("div");
-  var vidTitle = document.createElement("h4");
-  vidTitle.textContent = data.items[0].snippet.title;
+    var videoDiv = document.createElement("div");
+    var vidTitle = document.createElement("h4");
+    vidTitle.textContent = data.items[0].snippet.title;
 
-  videoDiv.append(iFrame, vidTitle);
-  document.querySelector("div#trailerdiv").append(videoDiv);
+    videoDiv.append(iFrame, vidTitle);
+    document.querySelector("div#trailerdiv").append(videoDiv);
+  }
 }
+
+
+function embedVideo(data) {
+  //delete img
+  var suchEmpty3 = document.querySelector("img#suchempty3");
+  if (suchEmpty3) {
+    suchEmpty3.remove();
+  }
+
+
+  console.log(data.items);
+
+  if (data.items.length === 0) {
+    var noVideosAvailable = document.createElement("p");
+    noVideosAvailable.textContent = "There are no YouTube video reviews for this movie.";
+    document.querySelector("div#ytdiv").append(noVideosAvailable);
+  } else {
+    for (var i=0; i<data.items.length; i++) {
+      var iFrame = document.createElement("iframe");
+      iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
+
+      var videoDiv = document.createElement("div");
+      var vidTitle = document.createElement("h4");
+      vidTitle.textContent = data.items[i].snippet.title;
+
+      videoDiv.append(iFrame, vidTitle);
+      document.querySelector("div#ytdiv").append(videoDiv);
+    }
+  }
+}
+
 
 //NY TIMES ARTICLE
 function getArticle() {
@@ -113,11 +141,17 @@ function getArticle() {
   })
 
   function embedArticle(data) {
+    //delete img
+    var suchEmpty2 = document.querySelector("img#suchempty2")
+    if (suchEmpty2) {
+      suchEmpty2.remove();
+    }
+
     var articleResults = data.results;
 
     if (articleResults.length === 0) {
       var noArticleAvailable = document.createElement("p");
-      noArticleAvailable.textContent = "There are no movie reviews for this movie.";
+      noArticleAvailable.textContent = "There are no NY Times reviews for this movie.";
       document.querySelector("ul#nydiv").append(noArticleAvailable);
     } else {
       for (var i=0; i < articleResults.length; i++) {
@@ -152,5 +186,10 @@ function resetSearch() {
   var ytDiv = document.querySelector("div#ytdiv");
   while (ytDiv.firstChild) {
     ytDiv.removeChild(ytDiv.lastChild);
+  }
+
+  var trailerDiv = document.querySelector("div#trailerdiv")
+  while (trailerDiv.firstChild) {
+    trailerDiv.removeChild(trailerDiv.lastChild);
   }
 }
