@@ -122,7 +122,7 @@ function embedVideo(data) {
       iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
 
       var videoDiv = document.createElement("div");
-      var vidTitle = document.createElement("h4");
+      var vidTitle = document.createElement("p");
       vidTitle.textContent = data.items[i].snippet.title;
 
       videoDiv.append(iFrame, vidTitle);
