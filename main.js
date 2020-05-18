@@ -140,7 +140,7 @@ function getArticle() {
     if (articleResults.length === 0) {
       var noArticleAvailable = document.createElement("p");
       noArticleAvailable.textContent = "There are no NY Times reviews for this movie.";
-      document.querySelector("ul#nydiv").append(noArticleAvailable);
+      document.querySelector("div#nydiv").append(noArticleAvailable);
     } else {
       for (var i=0; i < articleResults.length; i++) {
         var articleLink = articleResults[i].link;
