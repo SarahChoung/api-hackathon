@@ -8,7 +8,6 @@ form.addEventListener("submit", function (event) {
   var textInput = event.target[0];
   var textValue = textInput.value;
   var textNoSpace = textValue.split(" ").join("_");
-  console.log(textNoSpace);
   userInput = textNoSpace;
 
   getArticle();
@@ -21,9 +20,7 @@ form.addEventListener("submit", function (event) {
 
 function getTrailer() {
   var ytUserInput = "";
-  if (userInput.includes("movie")) {
-    console.log("you're good");
-  } else {
+  if (userInput.includes("trailer") === false) {
     ytUserInput = userInput.split("_").join("") + "trailer";
   }
 
@@ -41,7 +38,7 @@ function getTrailer() {
     success: function (data) {
       embedTrailer(data);
     },
-    error: function (response) {
+    error: function(response) {
       console.log("Request Failed");
     }
   });
@@ -49,9 +46,7 @@ function getTrailer() {
 
 function getVideo() {
   var ytUserInput = "";
-  if (userInput.includes("movie")) {
-    console.log("you're good");
-  } else {
+  if (userInput.includes("movie")==false) {
     ytUserInput = userInput.split("_").join("") + "review";
   }
 
@@ -66,10 +61,8 @@ function getVideo() {
       type: 'video',
       videoEmbeddable: true,
     },
-    success: function(data) {
-      embedVideo(data);
-    },
-    error: function (response) {
+    success: embedVideo,
+    error: function(response) {
       console.log("Request Failed");
     }
   });
@@ -81,8 +74,6 @@ function embedTrailer(data) {
   if (suchEmpty1) {
     suchEmpty1.classList.add("d-none");
   }
-
-  console.log(data.items);
 
   if (data.items.length === 0) {
     var noTrailerAvailable = document.createElement("p");
@@ -108,9 +99,6 @@ function embedVideo(data) {
   if (suchEmpty3) {
     suchEmpty3.classList.add("d-none");
   }
-
-
-  console.log(data.items);
 
   if (data.items.length === 0) {
     var noVideosAvailable = document.createElement("p");
