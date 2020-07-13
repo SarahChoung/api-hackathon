@@ -1,123 +1,143 @@
 //Form Submission
-var userInput;
-var form = document.querySelector("form");
+let userInput;
+const initialForm = document.getElementById("initial-form")
+const form = document.querySelector("form");
 
-form.addEventListener("submit", function (event) {
+
+initialForm.addEventListener("submit", function (event) {
   event.preventDefault();
   resetSearch();
-  var textInput = event.target[0];
-  var textValue = textInput.value;
-  var textNoSpace = textValue.split(" ").join("_");
+  const textInput = event.target[0];
+  const textValue = textInput.value;
+  let textNoSpace = textValue.split(" ").join("_");
   userInput = textNoSpace;
 
   getArticle();
-  getVideo();
-  getTrailer();
+  // getVideo();
+  // getTrailer();
+
+  document.getElementById("modal-overlay").classList.add("d-none")
+
+})
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  resetSearch();
+  const textInput = event.target[0];
+  const textValue = textInput.value;
+  let textNoSpace = textValue.split(" ").join("_");
+  userInput = textNoSpace;
+
+  getArticle();
+  // getVideo();
+  // getTrailer();
+
+
 })
 
 
 //YOUTUBE VIDEO
 
-function getTrailer() {
-  var ytUserInput = "";
-  if (userInput.includes("trailer") === false) {
-    ytUserInput = userInput.split("_").join("") + "trailer";
-  }
+// function getTrailer() {
+//   var ytUserInput = "";
+//   if (userInput.includes("trailer") === false) {
+//     ytUserInput = userInput.split("_").join("") + "trailer";
+//   }
 
-  $.ajax({
-    type: 'GET',
-    url: 'https://www.googleapis.com/youtube/v3/search',
-    data: {
-      key: youtubeAPIKey,
-      q: ytUserInput,
-      part: 'snippet',
-      maxResults: 1,
-      type: 'video',
-      videoEmbeddable: true,
-    },
-    success: function (data) {
-      embedTrailer(data);
-    },
-    error: function(response) {
-      console.log("Request Failed");
-    }
-  });
-}
+//   $.ajax({
+//     type: 'GET',
+//     url: 'https://www.googleapis.com/youtube/v3/search',
+//     data: {
+//       key: youtubeAPIKey,
+//       q: ytUserInput,
+//       part: 'snippet',
+//       maxResults: 1,
+//       type: 'video',
+//       videoEmbeddable: true,
+//     },
+//     success: function(data) {
+//       embedTrailer(data);
+//     },
+//     error: function(response) {
+//       console.log("Request Failed");
+//     }
+//   });
+// }
 
-function getVideo() {
-  var ytUserInput = "";
-  if (userInput.includes("movie")==false) {
-    ytUserInput = userInput.split("_").join("") + "review";
-  }
+// function getVideo() {
+//   var ytUserInput = "";
+//   if (userInput.includes("movie")==false) {
+//     ytUserInput = userInput.split("_").join("") + "review";
+//   }
 
-  $.ajax({
-    type: 'GET',
-    url: 'https://www.googleapis.com/youtube/v3/search',
-    data: {
-      key: youtubeAPIKey,
-      q: ytUserInput,
-      part: 'snippet',
-      maxResults: 5,
-      type: 'video',
-      videoEmbeddable: true,
-    },
-    success: embedVideo,
-    error: function(response) {
-      console.log("Request Failed");
-    }
-  });
-}
+//   $.ajax({
+//     type: 'GET',
+//     url: 'https://www.googleapis.com/youtube/v3/search',
+//     data: {
+//       key: youtubeAPIKey,
+//       q: ytUserInput,
+//       part: 'snippet',
+//       maxResults: 5,
+//       type: 'video',
+//       videoEmbeddable: true,
+//     },
+//     success: embedVideo,
+//     error: function(response) {
+//       console.log("Request Failed");
+//     }
+//   });
+// }
 
-function embedTrailer(data) {
-  //delete img
-  var suchEmpty1 = document.querySelector("img#suchempty1")
-  if (suchEmpty1) {
-    suchEmpty1.classList.add("d-none");
-  }
+// function embedTrailer(data) {
+//   //delete img
+//   var suchEmpty1 = document.querySelector("img#suchempty1")
+//   if (suchEmpty1) {
+//     suchEmpty1.classList.add("d-none");
+//   }
 
-  if (data.items.length === 0) {
-    var noTrailerAvailable = document.createElement("p");
-    noTrailerAvailable.textContent = "There are no available trailers on YouTube for this movie.";
-    document.querySelector("div#trailerdiv").append(noTrailerAvailable);
-  } else {
-    var iFrame = document.createElement("iframe");
-    iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+//   if (data.items.length === 0) {
+//     var noTrailerAvailable = document.createElement("p");
+//     noTrailerAvailable.textContent = "There are no available trailers on YouTube for this movie.";
+//     document.querySelector("div#trailerdiv").append(noTrailerAvailable);
+//   } else {
+//     var iFrame = document.createElement("iframe");
+//     iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
 
-    var videoDiv = document.createElement("div");
-    var vidTitle = document.createElement("h4");
-    vidTitle.textContent = data.items[0].snippet.title;
+//     var videoDiv = document.createElement("div");
+//     var vidTitle = document.createElement("h4");
+//     vidTitle.textContent = data.items[0].snippet.title;
 
-    videoDiv.append(iFrame, vidTitle);
-    document.querySelector("div#trailerdiv").append(videoDiv);
-  }
-}
+//     videoDiv.append(iFrame, vidTitle);
+//     document.querySelector("div#trailerdiv").append(videoDiv);
+//   }
+// }
 
 
-function embedVideo(data) {
-  //delete img
-  var suchEmpty3 = document.querySelector("img#suchempty3");
-  if (suchEmpty3) {
-    suchEmpty3.classList.add("d-none");
-  }
+// function embedVideo(data) {
+//   //delete img
+//   var suchEmpty3 = document.querySelector("img#suchempty3");
+//   if (suchEmpty3) {
+//     suchEmpty3.classList.add("d-none");
+//   }
 
-  if (data.items.length === 0) {
-    var noVideosAvailable = document.createElement("p");
-    noVideosAvailable.textContent = "There are no YouTube video reviews for this movie.";
-    document.querySelector("div#ytdiv").append(noVideosAvailable);
-  } else {
-    for (var i=0; i<data.items.length; i++) {
-      var iFrame = document.createElement("iframe");
-      iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
+//   if (data.items.length === 0) {
+//     var noVideosAvailable = document.createElement("p");
+//     noVideosAvailable.textContent = "There are no YouTube video reviews for this movie.";
+//     document.querySelector("div#ytdiv").append(noVideosAvailable);
+//   } else {
+//     for (var i=0; i<data.items.length; i++) {
+//       var iFrame = document.createElement("iframe");
+//       iFrame.setAttribute('src', 'https://www.youtube.com/embed/' + data.items[i].id.videoId)
 
-      var videoDiv = document.createElement("div");
-      var vidTitle = document.createElement("p");
-      vidTitle.textContent = data.items[i].snippet.title;
+//       var videoDiv = document.createElement("div");
+//       var vidTitle = document.createElement("p");
+//       vidTitle.textContent = data.items[i].snippet.title;
 
-      videoDiv.append(iFrame, vidTitle);
-      document.querySelector("div#ytdiv").append(videoDiv);
-    }
-  }
-}
+//       videoDiv.append(iFrame, vidTitle);
+//       document.querySelector("div#ytdiv").append(videoDiv);
+//     }
+//   }
+// }
 
 
 //NY TIMES ARTICLE

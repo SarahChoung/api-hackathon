@@ -8,11 +8,11 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
-  <title>Document</title>
+  <title>Movies to See</title>
 </head>
 
 <body class="bg-dark">
-  <h1 class="text-center pt-3">MOVIE INFO GRABBER</h1>
+  <h1 class="text-center pt-3">MOVIES TO SEE</h1>
   <div class="container">
     <!--Form-->
     <form class="pl-5 pr-5 pt-3 pb-3 bg-warning rounded" action="" method="post">
@@ -49,6 +49,23 @@
           <div  id="ytdiv"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="modal-overlay">
+    <div class="modal-content w-75">
+        <div class="image-container">
+          <div class="title-text text-center w-75">MOVIES TO SEE</div>
+        </div>
+          <form id="initial-form" class="pl-5 pr-5 pt-3 pb-3 rounded" action="" method="post">
+            <div class="form-group">
+              <label for="movieinput">Search for any movie and get its trailer and reviews!</label>
+              <input type="text" class="form-control" name="movieinput" id="movieinput" placeholder="Enter Movie Title Here">
+            </div>
+            <button type="submit" class="btn btn-success" id="submit-button">Search</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+            <button type="button" class="btn btn-danger float-right" id="resetbutton">Reset Page</button>
+          </form>
     </div>
   </div>
 

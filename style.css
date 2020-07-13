@@ -54,3 +54,49 @@ h1 {
 .active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
+/* Modal */
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+}
+
+.modal-content {
+  background-color: grey;
+}
+
+.hide {
+  display: none;
+}
+
+.image-container {
+  background-image: url("/assets/film-reel.gif"); /* The image used - important! */
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Needed to position the cutout text in the middle of the image */
+  height: 500px; /* Some height */
+}
+
+.title-text {
+  background-color: white;
+  color: black;
+  font-size: 5vw; /* Responsive font size */
+  font-weight: bold;
+  margin: 0 auto; /* Center the text container */
+  padding: 10px;
+  width: 50%;
+  text-align: center; /* Center text */
+  position: absolute; /* Position text */
+  top: 50%; /* Position text in the middle */
+  left: 50%; /* Position text in the middle */
+  transform: translate(-50%, -50%); /* Position text in the middle */
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+}
