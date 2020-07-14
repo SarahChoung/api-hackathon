@@ -1,10 +1,8 @@
 //Form Submission
 let userInput;
-const initialForm = document.getElementById("initial-form")
 const form = document.querySelector("form");
 
-
-initialForm.addEventListener("submit", function (event) {
+form.addEventListener("submit", function (event) {
   event.preventDefault();
   resetSearch();
   const textInput = event.target[0];
@@ -15,26 +13,7 @@ initialForm.addEventListener("submit", function (event) {
   getArticle();
   // getVideo();
   // getTrailer();
-
-  document.getElementById("modal-overlay").classList.add("d-none")
-
-})
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  resetSearch();
-  const textInput = event.target[0];
-  const textValue = textInput.value;
-  let textNoSpace = textValue.split(" ").join("_");
-  userInput = textNoSpace;
-
-  getArticle();
-  // getVideo();
-  // getTrailer();
-
-
-})
-
+});
 
 //YOUTUBE VIDEO
 
@@ -65,7 +44,7 @@ form.addEventListener("submit", function(event) {
 // }
 
 // function getVideo() {
-//   var ytUserInput = "";
+//   let ytUserInput = "";
 //   if (userInput.includes("movie")==false) {
 //     ytUserInput = userInput.split("_").join("") + "review";
 //   }
@@ -89,12 +68,6 @@ form.addEventListener("submit", function(event) {
 // }
 
 // function embedTrailer(data) {
-//   //delete img
-//   var suchEmpty1 = document.querySelector("img#suchempty1")
-//   if (suchEmpty1) {
-//     suchEmpty1.classList.add("d-none");
-//   }
-
 //   if (data.items.length === 0) {
 //     var noTrailerAvailable = document.createElement("p");
 //     noTrailerAvailable.textContent = "There are no available trailers on YouTube for this movie.";
@@ -112,14 +85,7 @@ form.addEventListener("submit", function(event) {
 //   }
 // }
 
-
 // function embedVideo(data) {
-//   //delete img
-//   var suchEmpty3 = document.querySelector("img#suchempty3");
-//   if (suchEmpty3) {
-//     suchEmpty3.classList.add("d-none");
-//   }
-
 //   if (data.items.length === 0) {
 //     var noVideosAvailable = document.createElement("p");
 //     noVideosAvailable.textContent = "There are no YouTube video reviews for this movie.";
@@ -139,80 +105,78 @@ form.addEventListener("submit", function(event) {
 //   }
 // }
 
-
 //NY TIMES ARTICLE
 function getArticle() {
   $.ajax({
-    url: "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=" + userInput + "&api-key=" + nyTimesAPIKey,
+    url:
+      "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=" +
+      userInput +
+      "&api-key=" +
+      nyTimesAPIKey,
     success: embedArticle,
-    error: logError
-  })
+    error: logError,
+  });
 
   function embedArticle(data) {
-    //delete img
-    var suchEmpty2 = document.querySelector("img#suchempty2")
-    if (suchEmpty2) {
-      suchEmpty2.classList.add("d-none");
-    }
-
-    var articleResults = data.results;
+    const articleResults = data.results;
 
     if (articleResults.length === 0) {
-      var noArticleAvailable = document.createElement("p");
-      noArticleAvailable.textContent = "There are no NY Times reviews for this movie.";
+      let noArticleAvailable = document.createElement("p");
+      noArticleAvailable.textContent =
+        "There are no NY Times reviews for this movie.";
       document.querySelector("div#nydiv").append(noArticleAvailable);
     } else {
-      for (var i=0; i < articleResults.length; i++) {
-        var articleLink = articleResults[i].link;
-        var articleURL = articleLink.url;
-        var articleHeadline = articleResults[i].headline;
-        var articleSummary = articleResults[i].summary_short;
+      for (var i = 0; i < articleResults.length; i++) {
+        const articleLink = articleResults[i].link;
+        const articleURL = articleLink.url;
+        const articleHeadline = articleResults[i].headline;
+        const articleSummary = articleResults[i].summary_short;
 
-        var titleButton = document.createElement("button");
+        let titleButton = document.createElement("button");
         titleButton.classList.add("accordion");
         titleButton.textContent = articleHeadline;
 
-        var accordionDiv = document.createElement("div");
-        accordionDiv.classList.add("panel")
+        let accordionDiv = document.createElement("div");
+        accordionDiv.classList.add("panel");
 
         let articleParagraph = document.createElement("p");
         if (articleSummary === "") {
           articleParagraph.textContent = "No summary available";
         } else {
           articleParagraph.textContent = articleResults[i].summary_short;
-          articleParagraph.textContent.replace("&quot;", "/'")
+          articleParagraph.textContent.replace("&quot;", "/'");
         }
 
-        let articleLinkPath = document.createElement("a")
+        let articleLinkPath = document.createElement("a");
         articleLinkPath.setAttribute("href", articleURL);
         articleLinkPath.textContent = "Click here to go to the full article.";
 
-        var nydiv = document.querySelector("div#nydiv");
+        let nydiv = document.querySelector("div#nydiv");
         accordionDiv.append(articleParagraph, articleLinkPath);
-        nydiv.append(titleButton, accordionDiv)
+        nydiv.append(titleButton, accordionDiv);
 
-        var acc = document.getElementsByClassName("accordion");
-        }
+        let acc = document.getElementsByClassName("accordion");
+      }
 
-        for (var i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function () {
-            /* Toggle between adding and removing the "active" class,
+      for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          /* Toggle between adding and removing the "active" class,
             to highlight the button that controls the panel */
-            this.classList.toggle("active");
+          this.classList.toggle("active");
 
-            /* Toggle between hiding and showing the active panel */
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-              panel.style.display = "none";
-            } else {
-              panel.style.display = "block";
-            }
-          });
-        }
+          /* Toggle between hiding and showing the active panel */
+          let panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
       }
     }
+  }
   function logError(err) {
-    console.log("error", err)
+    console.log("error", err);
   }
 }
 
@@ -229,7 +193,7 @@ function resetSearch() {
     ytDiv.removeChild(ytDiv.lastChild);
   }
 
-  var trailerDiv = document.querySelector("div#trailerdiv")
+  var trailerDiv = document.querySelector("div#trailerdiv");
   while (trailerDiv.firstChild) {
     trailerDiv.removeChild(trailerDiv.lastChild);
   }
@@ -242,12 +206,16 @@ var trailerImage = document.querySelector("img#suchempty1");
 var nyImage = document.querySelector("img#suchempty2");
 var ytImage = document.querySelector("img#suchempty3");
 
-resetButton.addEventListener("click", function() {
+resetButton.addEventListener("click", function () {
   resetSearch();
 
-  if (trailerImage.classList.contains("d-none") || nyImage.classList.contains("d-none") || ytImage.classList.contains("d-none")) {
+  if (
+    trailerImage.classList.contains("d-none") ||
+    nyImage.classList.contains("d-none") ||
+    ytImage.classList.contains("d-none")
+  ) {
     trailerImage.classList.remove("d-none");
     nyImage.classList.remove("d-none");
     ytImage.classList.remove("d-none");
   }
-})
+});
