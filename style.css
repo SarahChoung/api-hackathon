@@ -64,13 +64,13 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-color: white;
+  background-color:black;
 }
 
 .modal-content {
-  background-color: grey;
+  background-color: black;
 }
 
 .hide {
@@ -78,7 +78,7 @@ h1 {
 }
 
 .image-container {
-  background-image: url("/assets/film-reel.gif"); /* The image used - important! */
+  background-image: url("/assets/movie-screen.gif"); /* The image used - important! */
   background-size: cover;
   background-position: center;
   position: relative; /* Needed to position the cutout text in the middle of the image */
@@ -88,15 +88,12 @@ h1 {
 .title-text {
   background-color: white;
   color: black;
-  font-size: 5vw; /* Responsive font size */
+  font-size: 3vw;
   font-weight: bold;
-  margin: 0 auto; /* Center the text container */
-  padding: 10px;
-  width: 50%;
-  text-align: center; /* Center text */
-  position: absolute; /* Position text */
-  top: 50%; /* Position text in the middle */
-  left: 50%; /* Position text in the middle */
-  transform: translate(-50%, -50%); /* Position text in the middle */
+  margin: 0 auto;
+  width: 35%;
+  position: absolute;
+  top: 35%;
+  right: 15%;
   mix-blend-mode: screen; /* This makes the cutout text possible */
 }
