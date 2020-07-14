@@ -8,11 +8,11 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
-  <title>Document</title>
+  <title>Movies to See</title>
 </head>
 
 <body class="bg-dark">
-  <h1 class="text-center pt-3">MOVIE INFO GRABBER</h1>
+  <h1 class="text-center pt-3">MOVIES TO SEE</h1>
   <div class="container">
     <!--Form-->
     <form class="pl-5 pr-5 pt-3 pb-3 bg-warning rounded" action="" method="post">
@@ -30,25 +30,38 @@
       <div class="row mt-3 text-center d-flex  justify-content-center">
         <div class="col-6">
           <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">Movie Trailer</h3>
-          <img id="suchempty1" src="assets/such-empty.jpg">
           <div id="trailerdiv">
           </div>
         </div>
       </div>
       <!-- Reviews -->
       <div class="row mt-3">
-        <div class="col-6">
+        <div class="col-6 text-center">
           <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">NY Times Reviews</h3>
-          <img id="suchempty2" src="assets/such-empty.jpg">
-          <ul id="nydiv">
-          </ul>
+          <div id="nydiv">
+          </div>
         </div>
         <div class="col-6 text-center">
           <h3 class="text-white bg-dark pt-1 pb-1 rounded">YouTube Video Reviews</h3>
-          <img id="suchempty3" src="assets/such-empty.jpg">
           <div  id="ytdiv"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="modal-overlay">
+    <div class="modal-content w-100 text-center">
+        <div class="image-container">
+          <div class="title-text text-center d-flex align-items-center justify-content-center">MOVIES TO SEE</div>
+        </div>
+          <form id="initial-form" class="w-75 m-auto pl-5 pr-5 pt-3 pb-3 rounded" method="post">
+            <div class="form-group">
+              <label for="movieinput" class="text-white">Search for any movie and get its trailer and reviews!</label>
+              <input type="text" class="form-control w-75 m-auto" name="movieinput" id="movieinput" placeholder="Enter Movie Title Here">
+            </div>
+            <button type="submit" class="btn btn-success" id="submit-button">Search</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </form>
     </div>
   </div>
 
