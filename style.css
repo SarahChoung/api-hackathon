@@ -1,11 +1,8 @@
+body {
+  background-color: black;
+}
 img {
   width: 100%;
-}
-
-h1 {
-  font-family: 'Anton', sans-serif;
-  color: white;
-  letter-spacing: 0.5rem;
 }
 
 #ytdiv,
@@ -31,7 +28,8 @@ h1 {
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
+.active,
+.accordion:hover {
   background-color: #ccc;
 }
 
@@ -44,7 +42,7 @@ h1 {
 }
 
 .accordion:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  content: "\02795"; /* Unicode character for "plus" sign (+) */
   font-size: 13px;
   color: #777;
   float: right;
@@ -57,32 +55,31 @@ h1 {
 
 /* Modal */
 
-#modal-overlay {
+.modal-overlay {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
   width: 100%;
-  background-color:black;
-}
-
-.modal-content {
   background-color: black;
+  z-index: 2;
 }
 
-.hide {
-  display: none;
+.loading-img {
+  width: 100%;
+  height: 90vh;
+  object-fit: contain;
 }
 
 .image-container {
-  background-image: url("/assets/movie-screen.gif"); /* The image used - important! */
+  background-image: url("assets/movie-screen.gif");
   background-size: cover;
   background-position: center;
-  position: relative; /* Needed to position the cutout text in the middle of the image */
-  height: 500px; /* Some height */
+  position: relative;
+  height: 500px;
+  margin-top: 90px;
 }
 
 .title-text {
@@ -96,4 +93,11 @@ h1 {
   top: 35%;
   right: 15%;
   mix-blend-mode: screen; /* This makes the cutout text possible */
+}
+
+.grabbing-content {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  mix-blend-mode: screen;
 }

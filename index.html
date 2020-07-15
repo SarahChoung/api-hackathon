@@ -1,76 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <title>Movies to See</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <title>Movies to See</title>
-</head>
-
-<body class="bg-dark">
-  <h1 class="text-center pt-3">MOVIES TO SEE</h1>
-  <div class="container">
-    <!--Form-->
-    <form class="pl-5 pr-5 pt-3 pb-3 bg-warning rounded" action="" method="post">
-      <div class="form-group">
-        <label for="movieinput">Search for any movie and get its trailer and reviews!</label>
-        <input type="text" class="form-control" name="movieinput" id="movieinput" placeholder="Enter Movie Title Here">
-      </div>
-      <button type="submit" class="btn btn-success" id="submit-button">Search</button>
-      <button type="reset" class="btn btn-secondary">Clear</button>
-      <button type="button" class="btn btn-danger float-right" id="resetbutton">Reset Page</button>
-    </form>
-
-    <div class="container bg-light pt-1 mt-2 rounded">
-      <!-- Movie Trailer-->
-      <div class="row mt-3 text-center d-flex  justify-content-center">
-        <div class="col-6">
-          <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">Movie Trailer</h3>
-          <div id="trailerdiv">
-          </div>
-        </div>
-      </div>
-      <!-- Reviews -->
-      <div class="row mt-3">
-        <div class="col-6 text-center">
-          <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">NY Times Reviews</h3>
-          <div id="nydiv">
-          </div>
-        </div>
-        <div class="col-6 text-center">
-          <h3 class="text-white bg-dark pt-1 pb-1 rounded">YouTube Video Reviews</h3>
-          <div  id="ytdiv"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="modal-overlay">
-    <div class="modal-content w-100 text-center">
+  <body>
+    <div>
+      <div class="w-100 text-center">
         <div class="image-container">
-          <div class="title-text text-center d-flex align-items-center justify-content-center">MOVIES TO SEE</div>
+          <div
+            class="title-text text-center d-flex align-items-center justify-content-center"
+          >
+            MOVIES TO SEE
+          </div>
         </div>
-          <form id="initial-form" class="w-75 m-auto pl-5 pr-5 pt-3 pb-3 rounded" method="post">
-            <div class="form-group">
-              <label for="movieinput" class="text-white">Search for any movie and get its trailer and reviews!</label>
-              <input type="text" class="form-control w-75 m-auto" name="movieinput" id="movieinput" placeholder="Enter Movie Title Here">
-            </div>
-            <button type="submit" class="btn btn-success" id="submit-button">Search</button>
-            <button type="reset" class="btn btn-secondary">Clear</button>
-          </form>
+      </div>
     </div>
-  </div>
+    <div class="container w-75">
+      <!--Form-->
+      <form class="pl-5 pr-5 pt-3 pb-3 text-center" method="post">
+        <div class="input-group">
+          <label for="movieinput" class="text-white m-auto p-2"
+            >Search for any movie and get its trailer and reviews!</label
+          >
+          <input
+            type="text"
+            class="form-control w-75 m-auto rounded"
+            name="movieinput"
+            id="movieinput"
+            placeholder="Enter Movie Title Here"
+          />
+          <div>
+            <button
+              type="submit"
+              class="btn btn-success ml-1"
+              id="submit-button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+        <div class="mt-3">
+          <button type="reset" class="btn btn-secondary">
+            Clear
+          </button>
+          <button type="button" class="btn btn-danger" id="resetbutton">
+            Reset Page
+          </button>
+        </div>
+      </form>
+    </div>
 
+    <div id="loading" class="modal-overlay d-none">
+      <div class="text-center w-100">
+        <h1 class="grabbing-content">Grabbing Content. Please Stand By.</h1>
+        <img
+          class="loading-img"
+          src="assets/movie-countdown.gif"
+          alt="movie countdown"
+        />
+      </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <div id="info" class="d-none">
+      <div class="container bg-light pt-1 mt-2 pb-1 mb-2 rounded">
+        <!-- Movie Trailer-->
+        <div class="row mt-3 text-center d-flex justify-content-center">
+          <div class="col-6">
+            <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">
+              Movie Trailer
+            </h3>
+            <div id="trailerdiv"></div>
+          </div>
+        </div>
+        <!-- Reviews -->
+        <div class="row mt-3">
+          <div class="col-6 text-center">
+            <h3 class="text-white bg-dark text-center pt-1 pb-1 rounded">
+              NY Times Reviews
+            </h3>
+            <div id="nydiv"></div>
+          </div>
+          <div class="col-6 text-center">
+            <h3 class="text-white bg-dark pt-1 pb-1 rounded">
+              YouTube Video Reviews
+            </h3>
+            <div id="ytdiv"></div>
+          </div>
+        </div>
+        <div class="text-center mt-2 mb-2">
+          <button id="scroll-top" type="button" class="btn btn-secondary">
+            Back To Top
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <script src="config.js"></script>
-  <script src="main.js"></script>
-</body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
 
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
