@@ -11,6 +11,7 @@ form.addEventListener("submit", function (event) {
 
   const loadingScreen = document.getElementById("loading");
   loadingScreen.classList.remove("d-none");
+
   getArticle();
   // getVideo();
   // getTrailer();
@@ -24,7 +25,7 @@ form.addEventListener("submit", function (event) {
   setTimeout(() => {
     const info = document.getElementById("info");
     info.scrollIntoView({ behavior: "smooth" });
-  }, 3500);
+  }, 3000);
 });
 
 //YOUTUBE VIDEO
