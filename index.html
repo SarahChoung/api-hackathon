@@ -18,8 +18,8 @@
   </head>
 
   <body>
-    <div id="modal-overlay">
-      <div class="modal-content w-100 text-center">
+    <div>
+      <div class="w-100 text-center">
         <div class="image-container">
           <div
             class="title-text text-center d-flex align-items-center justify-content-center"
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="container w-50">
+    <div class="container w-75">
       <!--Form-->
       <form class="pl-5 pr-5 pt-3 pb-3 text-center" method="post">
         <div class="input-group">
@@ -43,8 +43,12 @@
             id="movieinput"
             placeholder="Enter Movie Title Here"
           />
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-success" id="submit-button">
+          <div>
+            <button
+              type="submit"
+              class="btn btn-success ml-1"
+              id="submit-button"
+            >
               Search
             </button>
           </div>
@@ -60,7 +64,13 @@
       </form>
     </div>
 
-    <div class="">
+    <div id="loading" class="modal-overlay d-none">
+      <div class="modal-content">
+        <img src="assets/movie-countdown.gif" alt="movie countdown" />
+      </div>
+    </div>
+
+    <div id="info" class="d-none">
       <div class="container bg-light pt-1 mt-2 rounded">
         <!-- Movie Trailer-->
         <div class="row mt-3 text-center d-flex justify-content-center">
