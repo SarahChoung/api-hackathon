@@ -68,10 +68,6 @@ img {
   z-index: 2;
 }
 
-.modal-content {
-  background-color: black;
-}
-
 .hide {
   display: none;
 }
@@ -96,4 +92,11 @@ img {
   top: 35%;
   right: 15%;
   mix-blend-mode: screen; /* This makes the cutout text possible */
+}
+
+.grabbing-content {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  mix-blend-mode: screen;
 }
