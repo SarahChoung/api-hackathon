@@ -11,9 +11,50 @@
 
 @media only screen and (min-width: 1400px) {
   .image-container {
-    background-size: cover;
     height: 550px;
     width: 90%;
     margin: auto;
+  }
+}
+
+@media only screen and (orientation: landscape) and (min-device-width: 319px) and (max-device-width: 849px) {
+  .title-text {
+    width: 25%;
+    right: 25%;
+    font: 2vw;
+  }
+}
+
+@media only screen and (orientation: landscape) and (min-device-width: 600px) and (max-device-width: 750px) {
+  .title-text {
+    right: 24%;
+  }
+}
+
+/* iPhone 5 Landscape */
+@media only screen and (orientation: landscape) and (min-device-width: 500px) and (max-device-width: 599px) {
+  .title-text {
+    right: 22%;
+  }
+}
+
+/* iPhone 6/7/8 Plus Landscape */
+@media only screen and (orientation: landscape) and (min-device-width: 730px) and (max-device-width: 750px) {
+  .title-text {
+    right: 25.5%;
+  }
+}
+
+/* Pixel 2XL landscape */
+@media only screen and (orientation: landscape) and (min-device-width: 800px) and (max-device-width: 830px) {
+  .image-container {
+    background-size: contain;
+    height: 200px;
+  }
+
+  .title-text {
+    width: 20%;
+    font-size: 2.5vw;
+    right: 29.5%;
   }
 }
