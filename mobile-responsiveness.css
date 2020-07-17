@@ -1,0 +1,19 @@
+@media only screen and (min-width: 768px) {
+  .image-container {
+    background-size: cover;
+    height: 430px;
+  }
+
+  #input-div {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .image-container {
+    background-size: cover;
+    height: 550px;
+    width: 90%;
+    margin: auto;
+  }
+}

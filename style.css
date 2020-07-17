@@ -69,17 +69,16 @@ img {
 
 .loading-img {
   width: 100%;
-  height: 90vh;
   object-fit: contain;
 }
 
 .image-container {
-  background-image: url("assets/movie-screen.gif");
-  background-size: cover;
+  background-image: url("assets/movie-screen-cropped.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   position: relative;
-  height: 500px;
-  margin-top: 90px;
+  height: 200px;
 }
 
 .title-text {
@@ -88,10 +87,10 @@ img {
   font-size: 3vw;
   font-weight: bold;
   margin: 0 auto;
-  width: 35%;
+  width: 30%;
   position: absolute;
-  top: 35%;
-  right: 15%;
+  top: 40%;
+  right: 18%;
   mix-blend-mode: screen; /* This makes the cutout text possible */
 }
 
