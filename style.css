@@ -100,3 +100,8 @@ img {
   font-weight: bold;
   mix-blend-mode: screen;
 }
+
+#trailer,
+.review {
+  width: 75%;
+}
