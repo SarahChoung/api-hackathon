@@ -23,8 +23,12 @@ form.addEventListener("submit", function (event) {
   }, 3000);
 
   setTimeout(() => {
-    const info = document.getElementById("info");
-    info.scrollIntoView({ behavior: "smooth" });
+    $([document.documentElement, document.body]).animate(
+      {
+        scrollTop: $("#info").offset().top,
+      },
+      500
+    );
   }, 3000);
 });
 
@@ -235,5 +239,5 @@ resetButton.addEventListener("click", function () {
 
 const topButton = document.getElementById("scroll-top");
 topButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  $("html, body").animate({ scrollTop: 0 }, 200);
 });
