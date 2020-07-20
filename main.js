@@ -98,7 +98,7 @@ function embedTrailer(data) {
 
     let trailerDiv = document.createElement("div");
     let vidTitle = document.createElement("h4");
-    vidTitle.textContent = data.items[0].snippet.title;
+    vidTitle.textContent = data.items[0].snippet.title.replace(/&quot;/g, '"');
 
     trailerDiv.append(iFrame, vidTitle);
     document.querySelector("div#trailerdiv").append(trailerDiv);
@@ -123,7 +123,10 @@ function embedVideo(data) {
       let videoDiv = document.createElement("div");
       videoDiv.classList.add("video-div");
       let vidTitle = document.createElement("p");
-      vidTitle.textContent = data.items[i].snippet.title;
+      vidTitle.textContent = data.items[i].snippet.title.replace(
+        /&quot;/g,
+        '"'
+      );
       vidTitle.classList.add("video-title");
 
       videoDiv.append(iFrame, vidTitle);
@@ -170,8 +173,8 @@ function getArticle() {
         if (articleSummary === "") {
           articleParagraph.textContent = "No summary available";
         } else {
-          articleParagraph.textContent = articleResults[i].summary_short;
-          articleParagraph.textContent.replace(/&quot;/g, '\\"');
+          let text = articleResults[i].summary_short.replace(/&quot;/g, '"');
+          articleParagraph.textContent = text;
         }
 
         let articleLinkPath = document.createElement("a");
