@@ -47,9 +47,7 @@ function getTrailer() {
       type: "video",
       videoEmbeddable: true,
     },
-    success: function (data) {
-      embedTrailer(data);
-    },
+    success: embedTrailer,
     error: function (response) {
       console.log("Request Failed");
     },
@@ -92,13 +90,14 @@ function embedTrailer(data) {
       "src",
       "https://www.youtube.com/embed/" + data.items[0].id.videoId
     );
+    iFrame.classList.add("mw-100");
 
-    let videoDiv = document.createElement("div");
+    let trailerDiv = document.createElement("div");
     let vidTitle = document.createElement("h4");
     vidTitle.textContent = data.items[0].snippet.title;
 
-    videoDiv.append(iFrame, vidTitle);
-    document.querySelector("div#trailerdiv").append(videoDiv);
+    trailerDiv.append(iFrame, vidTitle);
+    document.querySelector("div#trailerdiv").append(trailerDiv);
   }
 }
 
@@ -115,10 +114,13 @@ function embedVideo(data) {
         "src",
         "https://www.youtube.com/embed/" + data.items[i].id.videoId
       );
+      iFrame.classList.add("mw-100");
 
       let videoDiv = document.createElement("div");
+      videoDiv.classList.add("video-div");
       let vidTitle = document.createElement("p");
       vidTitle.textContent = data.items[i].snippet.title;
+      vidTitle.classList.add("video-title");
 
       videoDiv.append(iFrame, vidTitle);
       document.querySelector("div#ytdiv").append(videoDiv);
@@ -165,7 +167,7 @@ function getArticle() {
           articleParagraph.textContent = "No summary available";
         } else {
           articleParagraph.textContent = articleResults[i].summary_short;
-          articleParagraph.textContent.replace("&quot;", "/'");
+          articleParagraph.textContent.replace(/&quot;/g, '\\"');
         }
 
         let articleLinkPath = document.createElement("a");

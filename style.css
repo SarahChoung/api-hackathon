@@ -5,13 +5,17 @@ img {
   width: 100%;
 }
 
-#ytdiv,
+.video-div,
 #trailerdiv,
 #nydiv {
   background-color: rgb(236, 236, 239);
   border-radius: 3px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.video-div {
+  margin: 10px 0;
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
