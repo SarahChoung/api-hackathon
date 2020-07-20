@@ -98,9 +98,11 @@ function embedTrailer(data) {
 
     let trailerDiv = document.createElement("div");
     let vidTitle = document.createElement("h4");
-    vidTitle.textContent = data.items[0].snippet.title.replace(/&quot;/g, '"');
+    let vidTitleText = decodeEntities(data.items[0].snippet.title);
+    vidTitle.textContent = vidTitleText;
 
     trailerDiv.append(iFrame, vidTitle);
+    trailerDiv.classList.add("p-1");
     document.querySelector("div#trailerdiv").append(trailerDiv);
   }
 }
@@ -123,10 +125,8 @@ function embedVideo(data) {
       let videoDiv = document.createElement("div");
       videoDiv.classList.add("video-div");
       let vidTitle = document.createElement("p");
-      vidTitle.textContent = data.items[i].snippet.title.replace(
-        /&quot;/g,
-        '"'
-      );
+      let vidText = decodeEntities(data.items[i].snippet.title);
+      vidTitle.textContent = vidText;
       vidTitle.classList.add("video-title");
 
       videoDiv.append(iFrame, vidTitle);
@@ -173,7 +173,7 @@ function getArticle() {
         if (articleSummary === "") {
           articleParagraph.textContent = "No summary available";
         } else {
-          let text = articleResults[i].summary_short.replace(/&quot;/g, '"');
+          let text = decodeEntities(articleResults[i].summary_short);
           articleParagraph.textContent = text;
         }
 
@@ -244,3 +244,10 @@ const topButton = document.getElementById("scroll-top");
 topButton.addEventListener("click", () => {
   $("html, body").animate({ scrollTop: 0 }, 200);
 });
+
+//Decoding Entities
+function decodeEntities(encodedString) {
+  let textArea = document.createElement("textarea");
+  textArea.innerHTML = encodedString;
+  return textArea.value;
+}
