@@ -144,7 +144,7 @@ function getArticle() {
       "&api-key=" +
       nyTimesAPIKey,
     success: embedArticle,
-    error: function logError(err) {
+    error: function (err) {
       console.error(err);
     },
   });
