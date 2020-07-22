@@ -16,10 +16,10 @@ Try the application live at [movies-to-see.sarahchoung.com]
 
 ## Features
 
-- User can input the title of any movie
-- User can view a list of review articles and click their respective links
-- User can view a movie trailer and a list of YouTube video reviews
-- User can search for another movie without refreshing the page
+- Users can input the title of any movie.
+- Users can view a list of review articles and click their respective links.
+- Users can view a movie trailer and a list of YouTube video reviews.
+- Users can search for another movie without refreshing the page.
 
 ## Preview
 
