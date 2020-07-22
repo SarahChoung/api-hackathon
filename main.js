@@ -1,7 +1,7 @@
 //Form Submission
 let userInput;
-const form = document.querySelector("form");
 
+const form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   resetSearch();
@@ -52,8 +52,8 @@ function getTrailer() {
       videoEmbeddable: true,
     },
     success: embedTrailer,
-    error: function (response) {
-      console.log("Request Failed");
+    error: function (err) {
+      console.error(err);
     },
   });
 }
@@ -76,8 +76,8 @@ function getVideo() {
       videoEmbeddable: true,
     },
     success: embedVideo,
-    error: function (response) {
-      console.log("Request Failed");
+    error: function (err) {
+      console.error(err);
     },
   });
 }
@@ -144,7 +144,9 @@ function getArticle() {
       "&api-key=" +
       nyTimesAPIKey,
     success: embedArticle,
-    error: logError,
+    error: function logError(err) {
+      console.error(err);
+    },
   });
 
   function embedArticle(data) {
@@ -189,11 +191,7 @@ function getArticle() {
       let acc = document.getElementsByClassName("accordion");
       for (let i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function () {
-          /* Toggle between adding and removing the "active" class,
-            to highlight the button that controls the panel */
           this.classList.toggle("active");
-
-          /* Toggle between hiding and showing the active panel */
           let panel = this.nextElementSibling;
           if (panel.style.display === "block") {
             panel.style.display = "none";
@@ -205,9 +203,6 @@ function getArticle() {
       articleLoaded = true;
     }
   }
-  function logError(err) {
-    console.log("error", err);
-  }
 }
 
 //Reset Search
@@ -215,17 +210,17 @@ function getArticle() {
 function resetSearch() {
   document.getElementById("info").classList.add("d-none");
 
-  var nyDiv = document.querySelector("div#nydiv");
+  let nyDiv = document.querySelector("div#nydiv");
   while (nyDiv.firstChild) {
     nyDiv.removeChild(nyDiv.lastChild);
   }
 
-  var ytDiv = document.querySelector("div#ytdiv");
+  let ytDiv = document.querySelector("div#ytdiv");
   while (ytDiv.firstChild) {
     ytDiv.removeChild(ytDiv.lastChild);
   }
 
-  var trailerDiv = document.querySelector("div#trailerdiv");
+  let trailerDiv = document.querySelector("div#trailerdiv");
   while (trailerDiv.firstChild) {
     trailerDiv.removeChild(trailerDiv.lastChild);
   }
