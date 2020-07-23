@@ -12,7 +12,7 @@ A front end JavaScript application that utilizes the data from the [New York Tim
 
 ## Live Demo
 
-Try the application live at [movies-to-see.sarahchoung.com]
+Try the application live at [https://movies-to-see.sarahchoung.com/](https://movies-to-see.sarahchoung.com/)
 
 ## Features
 
