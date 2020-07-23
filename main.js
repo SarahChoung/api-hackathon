@@ -13,6 +13,7 @@ form.addEventListener("submit", function (event) {
   loadingScreen.classList.remove("d-none");
   const resetButton = document.getElementById("resetbutton");
   resetButton.classList.remove("disabled");
+  resetButton.setAttribute("aria-disabled", "false");
 
   getArticle();
   getVideo();
@@ -227,14 +228,17 @@ function resetSearch() {
     trailerDiv.removeChild(trailerDiv.lastChild);
   }
 
-  document.getElementById("resetbutton").classList.add("disabled");
+  const resetButton = document.getElementById("resetbutton");
+  resetButton.classList.add("disabled");
+  resetButton.setAttribute("aria-disabled", "true");
 }
 
 //Reset Page Button Functionality
 const resetButton = document.getElementById("resetbutton");
-
 resetButton.addEventListener("click", function () {
-  resetSearch();
+  if (!resetButton.classList.contains("disabled")) {
+    resetSearch();
+  }
 });
 
 //Scroll To Top Functionality
