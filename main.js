@@ -11,6 +11,8 @@ form.addEventListener("submit", function (event) {
 
   const loadingScreen = document.getElementById("loading");
   loadingScreen.classList.remove("d-none");
+  const resetButton = document.getElementById("resetbutton");
+  resetButton.classList.remove("disabled");
 
   getArticle();
   getVideo();
@@ -224,10 +226,12 @@ function resetSearch() {
   while (trailerDiv.firstChild) {
     trailerDiv.removeChild(trailerDiv.lastChild);
   }
+
+  document.getElementById("resetbutton").classList.add("disabled");
 }
 
 //Reset Page Button Functionality
-const resetButton = document.querySelector("button#resetbutton");
+const resetButton = document.getElementById("resetbutton");
 
 resetButton.addEventListener("click", function () {
   resetSearch();
