@@ -56,7 +56,9 @@ function getTrailer() {
     },
     success: embedTrailer,
     error: function (err) {
-      console.error(err);
+      let trailerError = document.createElement("p");
+      trailerError.textContent = "An error occurred.";
+      document.getElementById("trailerdiv").append(trailerError);
     },
   });
 }
@@ -80,7 +82,9 @@ function getVideo() {
     },
     success: embedVideo,
     error: function (err) {
-      console.error(err);
+      let videoError = document.createElement("p");
+      videoError.textContent = "An error occurred.";
+      document.getElementById("ytdiv").append(videoError);
     },
   });
 }
@@ -90,7 +94,7 @@ function embedTrailer(data) {
     let noTrailerAvailable = document.createElement("p");
     noTrailerAvailable.textContent =
       "There are no available trailers on YouTube for this movie.";
-    document.querySelector("div#trailerdiv").append(noTrailerAvailable);
+    document.getElementById("trailerdiv").append(noTrailerAvailable);
   } else {
     let iFrame = document.createElement("iframe");
     iFrame.setAttribute(
@@ -106,7 +110,7 @@ function embedTrailer(data) {
 
     trailerDiv.append(iFrame, vidTitle);
     trailerDiv.classList.add("p-1");
-    document.querySelector("div#trailerdiv").append(trailerDiv);
+    document.getElementById("trailerdiv").append(trailerDiv);
   }
 }
 
@@ -115,7 +119,7 @@ function embedVideo(data) {
     let noVideosAvailable = document.createElement("p");
     noVideosAvailable.textContent =
       "There are no YouTube video reviews for this movie.";
-    document.querySelector("div#ytdiv").append(noVideosAvailable);
+    document.getElementById("ytdiv").append(noVideosAvailable);
   } else {
     for (let i = 0; i < data.items.length; i++) {
       let iFrame = document.createElement("iframe");
@@ -133,7 +137,7 @@ function embedVideo(data) {
       vidTitle.classList.add("video-title");
 
       videoDiv.append(iFrame, vidTitle);
-      document.querySelector("div#ytdiv").append(videoDiv);
+      document.getElementById("ytdiv").append(videoDiv);
     }
   }
 }
@@ -148,7 +152,9 @@ function getArticle() {
       nyTimesAPIKey,
     success: embedArticle,
     error: function (err) {
-      console.error(err);
+      let articleError = document.createElement("p");
+      articleError.textContent = "An error occurred.";
+      document.getElementById("nydiv").append(articleError);
     },
   });
 
@@ -159,7 +165,7 @@ function getArticle() {
       let noArticleAvailable = document.createElement("p");
       noArticleAvailable.textContent =
         "There are no NY Times reviews for this movie.";
-      document.querySelector("div#nydiv").append(noArticleAvailable);
+      document.getElementById("nydiv").append(noArticleAvailable);
     } else {
       for (let i = 0; i < articleResults.length; i++) {
         const articleLink = articleResults[i].link;
@@ -186,7 +192,7 @@ function getArticle() {
         articleLinkPath.setAttribute("href", articleURL);
         articleLinkPath.textContent = "Click here to go to the full article.";
 
-        let nydiv = document.querySelector("div#nydiv");
+        let nydiv = document.getElementById("nydiv");
         accordionDiv.append(articleParagraph, articleLinkPath);
         nydiv.append(titleButton, accordionDiv);
       }
@@ -213,17 +219,17 @@ function getArticle() {
 function resetSearch() {
   document.getElementById("info").classList.add("d-none");
 
-  let nyDiv = document.querySelector("div#nydiv");
+  let nyDiv = document.getElementById("nydiv");
   while (nyDiv.firstChild) {
     nyDiv.removeChild(nyDiv.lastChild);
   }
 
-  let ytDiv = document.querySelector("div#ytdiv");
+  let ytDiv = document.getElementById("ytdiv");
   while (ytDiv.firstChild) {
     ytDiv.removeChild(ytDiv.lastChild);
   }
 
-  let trailerDiv = document.querySelector("div#trailerdiv");
+  let trailerDiv = document.getElementById("trailerdiv");
   while (trailerDiv.firstChild) {
     trailerDiv.removeChild(trailerDiv.lastChild);
   }
